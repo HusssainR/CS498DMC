@@ -1,0 +1,11 @@
+Part A:
+US Avg Latency: 591.56 ms
+EU Avg Latency: 890.12 ms
+Part B:
+0 Misses out of 100 Trials
+
+Analysis:
+The latency measurements from part A show that the US instance responds faster than the Europe instance. This makes sense because of the distance between the client in 
+Cloud Shell and the europe-west1 region. The farther the client the more increases the time required for network packets to travel. 
+The consistency test from Part B resulted in 0 misses. This shows that Firestore's replication is highly efficient and well done. Even though the system is eventually consistent,
+the lag was smaller than the time it took for the script to send the request, meaning the data was already synchronized by the time it was queried in Europe. Resulting in 0 misses.
