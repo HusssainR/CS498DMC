@@ -1,0 +1,5 @@
+I wrote a python analysis script which is attached in this repository. It uses the requests library to automate the performance and consistency testing for the two VM instances.
+For Part A the script performs 10 GET requests to the /list endpoint on the US instance and Europse instance. It uses time to record the start of the request and calculate the 
+difference in time in milliseconds on how long it takes. 
+For Part B, I wrote a script that runs 100 times. In each iteration, it performs a POST request to the US instance to register a username and then sends a GET request 
+to the Europe instance to see if that username is on the global list. It uses a counter to track any misses where the data isnt on the Europe region at the time of the query.
