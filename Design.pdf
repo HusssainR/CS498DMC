@@ -1,0 +1,13 @@
+Row Key & Sharding: In Bigtable, data is dynamically partitioned (sharded) across nodes based on the Row Key. What is your proposed Row Key for this dataset? Explain how this choice avoids "hotspotting" and impacts your ability to efficiently query vehicles by City or Make.
+My proposed row key for this dataset is City#Make#ID. This choice avoid hotspotting by spreading the data across cities and makes of cars. This stops then from just clumping on a single ID.
+In addition, because we place the city and type of car first we can scan the prefix for efficent queries like a scan see all the vehicles in a city or all of the fords across the country.
+Without this format, we would need to query the entire database which is more inefficent. 
+
+Column Families: How would you design the Column Families for this dataset? Group the attributes logically and explain how this aids in distributed read performance.
+For the design, I would organize the attributes into two primary Column Families vehicle details and Location data. In a wide column store, data within a column family is stored together on
+disk. This design improves performance because if a query only needs to generate a report on vehicle range and specs, the system doesn't have to waste cycles reading the geographic metadata.
+
+Horizontal Scaling: Compare the pros and cons of using a Hashed Shard Key (e.g., on VIN) versus a Range-Based Shard Key (e.g., on Model Year) regarding query routing efficiency and cluster performance.
+Using a Hashed Shard Key on VIN ensures a correct and uniform distribution of data across all nodes. THis maximizes cluster throughput and prevents any single node from becoming a bottleneck 
+during writes. However, a Range-Based Shard Key on Model Year would be much more efficient for general queries like find all cars made between 2020 and 2024. But it can create a hotspot node where all 
+new 2026 vehicle records are funneled into the same shard.
