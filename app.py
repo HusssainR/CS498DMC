@@ -4,7 +4,9 @@ from pymongo.write_concern import WriteConcern
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb+srv://hussainrazvi1524_db_user:lZ6TP81q8YrA3foI@cluster0.dvyiafp.mongodb.net/?appName=Cluster0")
+MONGO_URI = "mongodb+srv://hussainrazvi1524_db_user:lZ6TP81q8YrA3foI@cluster0.dvyiafp.mongodb.net/?appName=Cluster0"
+
+client = MongoClient(MONGO_URI)
 db = client['ev_db']
 collection = db['vehicles']
 
